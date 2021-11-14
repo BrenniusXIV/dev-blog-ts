@@ -7,8 +7,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     switch (req.method){
         case 'GET':
             handleGET(postId, res)
+            break
         case 'DELETE':
             handleDELETE(postId, res)
+            break
     }
 }
 
