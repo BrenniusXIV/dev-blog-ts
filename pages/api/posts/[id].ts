@@ -8,25 +8,52 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         case 'GET':
             handleGET(postId, res)
             break
+        case 'PUT':
+            handlePUT(postId, req.body, res)
+            break
         case 'DELETE':
             handleDELETE(postId, res)
+            break
+        default:
+            res.status(400)
             break
     }
 }
 
-async function handleGET(postId : number, res : any) {
-    const post = await prisma.post.findUnique({
-        where: { id: postId },
-        include: { author: true },
-    })
+async function handleGET(postId : number, res : NextApiResponse) {
+    try {
+        const post = await prisma.post.findUnique({
+            where: { id: postId },
+            include: { author: true },
+        })
 
-    res.status(200).json(post)
+        post === null ? res.status(404).json({"errorMessage": `No record of post with ID #${postId}.`}) : res.status(200).json(post)
+    } catch (err) {
+        res.status(400).json(err)
+    }
 }
 
-async function handleDELETE(postId: number, res: any) {
-    const post = await prisma.post.delete({
-        where: { id: postId }
-    })
+async function handlePUT(postId : number, data: object, res : NextApiResponse) {
+    try {
+        const post = await prisma.post.update({
+            where: { id: postId },
+            data: { ...data }
+        })
+        res.status(200).json(post)
+    } catch (err) {
+        res.status(400).json(err)
+    }
+}
 
-    res.status(200).json(post)
+
+
+async function handleDELETE(postId: number, res: NextApiResponse) {
+    try {
+        const post = await prisma.post.delete({
+            where: { id: postId }
+        })
+        res.status(200).json(post)
+    } catch (err) {
+        res.status(400).json(err)
+    }
 }

@@ -8,6 +8,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         case 'GET':
             handleGET(userId, res)
             break
+        case 'PUT':
+            handlePUT(userId, req.body, res)
+            break
         case 'DELETE':
             handleDELETE(userId, res)
             break
@@ -17,18 +20,37 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 }
 
-async function handleGET(userId : number, res : any) {
-    const user = await prisma.user.findUnique({
-        where: { id: userId },
-    })
-
-    res.status(200).json(user)
+async function handleGET(userId : number, res : NextApiResponse) {
+    try {
+        const user = await prisma.user.findUnique({
+            where: { id: userId },
+        })
+        user === null ? res.status(404).json({"errorMessage": `No record of user with ID #${userId}.`}) : res.status(200).json(user)    
+    } catch (err) {
+        res.status(400).json(err)
+    }
 }
 
-async function handleDELETE(userId: number, res: any) {
-    const user = await prisma.user.delete({
-        where: { id: userId }
-    })
+async function handlePUT(userId: number, data: object, res : NextApiResponse) {
+    try {
+        const user = await prisma.user.update({
+            where: { id: userId },
+            data: { ...data }
+        })
+        res.status(200).json(user)
+    } catch (err) {
+        res.status(400).json(err)
+    }
+}
 
-    res.status(200).json(user)
+async function handleDELETE(userId: number, res: NextApiResponse) {
+    try{
+        const user = await prisma.user.delete({
+            where: { id: userId }
+        })
+
+        res.status(200).json(user)
+    } catch (err) {
+        res.status(400).json(err)
+    }
 }
