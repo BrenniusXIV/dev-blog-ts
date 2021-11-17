@@ -2,15 +2,18 @@ import React from 'react'
 import ReactMarkdown from 'react-markdown'
 import { GetServerSideProps } from 'next'
 import { PostProps } from '../../components/Post'
+import Layout from '../../components/Layout'
 
 
 const Post = (props : PostProps) => {
     return (
-        <div>
-            <h2>{props.title}</h2>
-            <p>By {props?.author?.name || 'unknown author'} at {props?.createdAt || 'unknown time'}</p>
-            <ReactMarkdown>{props.content}</ReactMarkdown>
-        </div>
+        <Layout>
+            <div>
+                <h2>{props.title}</h2>
+                <p>By {props?.author?.name || 'unknown author'} at {props?.createdAt || 'unknown time'}</p>
+                <ReactMarkdown>{props.content}</ReactMarkdown>
+            </div>
+        </Layout>
     )
 }
 
