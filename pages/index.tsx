@@ -1,5 +1,5 @@
 import { GetServerSideProps } from 'next'
-import Navbar from '../components/Navbar'
+import Layout from '../components/Layout'
 import Post, { PostProps } from '../components/Post'
 
 type FeedProps = {
@@ -8,17 +8,13 @@ type FeedProps = {
 
 const Home = ({feed} : FeedProps) => {
   return (
-    <div>
-      <Navbar className="navbar" loggedIn={true}/>
-      <main>
-        {feed.map(post => (
+    <Layout>
+      {feed.map(post => (
           <div key={post.id}>
             <Post title={post.title} content={post.content} id={post.id} author={post.author} createdAt={post.createdAt}/>
           </div>
         ))}
-      </main>
-    </div>
-    
+    </Layout>
   )
 }
 

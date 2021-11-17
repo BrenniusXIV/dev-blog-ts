@@ -5,10 +5,9 @@ import Link from 'next/link'
 
 type NavbarProps = {
     className: string;
-    loggedIn: boolean;
 }
 
-const Navbar = ({ className, loggedIn } : NavbarProps): JSX.Element => {
+const Navbar = ({ className } : NavbarProps): JSX.Element => {
     return (
         <div className={className}>
             <Link href="/">
@@ -18,7 +17,7 @@ const Navbar = ({ className, loggedIn } : NavbarProps): JSX.Element => {
                 <a>Profile</a>
             </Link>
             <Link href="/login">
-                <a>{loggedIn ? `Logout` : `Login`}</a>
+                <a>Login</a>
             </Link>
             <style jsx>{`
                 div {
