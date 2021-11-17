@@ -6,7 +6,6 @@ type LayoutProps = {
 }
 
 const Layout = ({children} : LayoutProps) => {
-    console.log(typeof Navbar)
     return (
         <div className="layout">
             <Navbar className="navbar"/>
