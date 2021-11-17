@@ -15,7 +15,7 @@ export type PostProps = {
 const Post = (post : PostProps) => {
     const authorName = post.author ? post.author.name : 'unknown author'
     return (
-        <div>
+        <div onClick={() => Router.push('/posts/[id]', `/posts/${post.id}`)}>
             <h2>{post.title}</h2>
             <small>Posted by {authorName}</small>
             <p>{post.content}</p>
