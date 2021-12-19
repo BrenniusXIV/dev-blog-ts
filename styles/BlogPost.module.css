@@ -1,0 +1,29 @@
+.postContainer {
+    display: flex;
+    flex-direction: column;
+    margin: 8px 16px;
+    padding: 8px;
+    background: lightblue;
+    border: lightskyblue solid 2px;
+    border-radius: 24px;
+}
+
+.postTitle {
+    align-self: center;
+}
+
+.postMetadata {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    border-top: 1px dashed whitesmoke;
+    border-bottom: 1px dashed whitesmoke;
+}
+
+.postMarkdownContainer {
+    align-self: center;
+    margin: 8px;
+    padding: 8px;
+    border: 1px solid whitesmoke;
+    border-radius: 16px;
+}

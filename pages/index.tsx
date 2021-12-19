@@ -1,29 +1,43 @@
-import { GetServerSideProps } from 'next'
-import Layout from '../components/Layout'
-import Post, { PostProps } from '../components/Post'
+import { GetServerSideProps } from "next";
+import Layout from "../components/Layout";
+import PostPreview, { PostProps } from "../components/PostPreview";
+import styles from "../styles/Home.module.css";
 
 type FeedProps = {
-  feed: PostProps[]
-}
+  feed: PostProps[];
+};
 
-const Home = ({feed} : FeedProps) => {
+const Home = ({ feed }: FeedProps) => {
   return (
     <Layout>
-      {feed.map(post => (
-          <div key={post.id}>
-            <Post title={post.title} content={post.content} id={post.id} author={post.author} createdAt={post.createdAt}/>
+      <div className={styles.postContainer}>
+        {feed.map((post) => (
+          <div className={styles.post} key={post.id}>
+            <PostPreview
+              title={post.title}
+              content={post.content}
+              id={post.id}
+              author={post.author}
+              createdAt={post.createdAt}
+            />
           </div>
         ))}
+      </div>
     </Layout>
-  )
-}
+  );
+};
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const res = await fetch('http://localhost:3000/api/feed')
-  const feed = await res.json()
+  const res = await fetch("http://localhost:3000/api/feed");
+  const feed = await res.json();
+  feed.sort(
+    (post1: PostProps, post2: PostProps) =>
+      Date.parse(post2.createdAt) - Date.parse(post1.createdAt)
+  );
+
   return {
     props: { feed },
-  }
-}
+  };
+};
 
-export default Home
+export default Home;

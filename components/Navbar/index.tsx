@@ -1,46 +1,42 @@
-import React from "react"
-import Link from 'next/link'
-
-
+import React from "react";
+import Link from "next/link";
 
 type NavbarProps = {
-    className: string;
-}
+  className: string;
+};
 
-const Navbar = ({ className } : NavbarProps): JSX.Element => {
-    return (
-        <div className={className}>
-            <Link href="/">
-                <a>Home</a>
-            </Link>
-            <Link href="/profile">
-                <a>Profile</a>
-            </Link>
-            <Link href="/login">
-                <a>Login</a>
-            </Link>
-            <style jsx>{`
-                div {
-                    display: flex;
-                    justify-content: space-evenly;
-                    border: 5px dashed black;
-                }
-                a {
-                    color: white;
-                    background-color: blue;
-                    padding: 10px;
-                    margin: 5px;
-                    border: 1px solid lightblue;
-                }
-                a:hover {
-                    color: red;
-                    background-color: pink;
-                    border: 1px dashed purple;
-                }
-            `}</style>
-        </div>
-        
-    )
-}
+const Navbar = ({ className }: NavbarProps): JSX.Element => {
+  return (
+    <div className={className}>
+      <Link href="/">
+        <a>Home</a>
+      </Link>
+      <Link href="/profile">
+        <a>Profile</a>
+      </Link>
+      <Link href="/login">
+        <a>Login</a>
+      </Link>
+      <style jsx>{`
+        div {
+          display: flex;
+          justify-content: space-evenly;
+        }
+        a {
+          color: white;
+          background-color: blue;
+          padding: 20px;
+          margin: 8px;
+          border: 1px solid lightblue;
+        }
+        a:hover {
+          color: white;
+          text-decoration: underline;
+          background-color: purple;
+        }
+      `}</style>
+    </div>
+  );
+};
 
-export default Navbar
+export default Navbar;
