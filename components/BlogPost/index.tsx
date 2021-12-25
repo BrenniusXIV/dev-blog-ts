@@ -3,7 +3,7 @@ import ReactMarkdown from "react-markdown";
 import { PostProps } from "../PostPreview";
 import styles from "../../styles/BlogPost.module.css";
 
-const PostPreview = (post: PostProps) => {
+const BlogPost = (post: PostProps) => {
   const authorName = post.author ? post.author.name : "unknown author";
   const postedDate = post.createdAt
     ? new Date(post.createdAt).toLocaleDateString()
@@ -22,4 +22,4 @@ const PostPreview = (post: PostProps) => {
   );
 };
 
-export default PostPreview;
+export default BlogPost;

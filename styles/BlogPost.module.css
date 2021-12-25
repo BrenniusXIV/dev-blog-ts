@@ -1,7 +1,7 @@
 .postContainer {
     display: flex;
     flex-direction: column;
-    margin: 8px 16px;
+    margin: 8px 128px;
     padding: 8px;
     background: lightblue;
     border: lightskyblue solid 2px;
@@ -26,4 +26,5 @@
     padding: 8px;
     border: 1px solid whitesmoke;
     border-radius: 16px;
+    width: 100%;
 }
