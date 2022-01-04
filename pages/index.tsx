@@ -11,6 +11,9 @@ const Home = ({ feed }: FeedProps) => {
   return (
     <Layout>
       <div className={styles.postContainer}>
+        <p className={styles.post}>Welcome to my blog! I post about technical things I enjoy here, including my own work.</p>
+      </div>
+      <div className={styles.postContainer}>
         {feed.map((post) => (
           <div className={styles.post} key={post.id}>
             <PostPreview

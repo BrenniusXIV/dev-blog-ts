@@ -17,7 +17,7 @@ const PostPreview = (post: PostProps) => {
     <div onClick={() => Router.push("/posts/[id]", `/posts/${post.id}`)}>
       <h2>{post.title}</h2>
       <small>Posted by {authorName}</small>
-      <p>{new Date(post.createdAt).toLocaleDateString()}</p>
+      <p>Originally posted: {new Date(post.createdAt).toLocaleDateString()}</p>
     </div>
   );
 };
