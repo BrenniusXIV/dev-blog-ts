@@ -1,12 +1,15 @@
 import { NextApiHandler } from "next";
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import { PrismaClient } from "@prisma/client";
 import prisma from "../../../db/prisma";
 
 const authHandler: NextApiHandler = (req, res) => NextAuth(req, res, options);
 export default authHandler;
 
 const options = {
+  adapter: PrismaAdapter(prisma),
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -20,7 +23,7 @@ const options = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
-        const res = await fetch("/api/user/login", {
+        const res = await fetch("http://localhost:3000/api/user/login", {
           method: "POST",
           body: JSON.stringify(credentials),
           headers: { "Content-Type": "application/json" },
@@ -36,4 +39,14 @@ const options = {
       },
     }),
   ],
+  session: {
+    strategy: "jwt",
+    maxAge: 7 * 24 * 60 * 60,
+    updateAge: 24 * 60 * 60,
+  },
+  jwt: {
+    secret: process.env.JWT_SECRET,
+    maxAge: 7 * 24 * 60 * 60,
+  },
+  secret: process.env.NEXT_SECRET,
 };

@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import prisma from '../../../db/prisma'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-    const userId = Number(req.query.id)
+    const userId = String(req.query.id)
 
     switch (req.method){
         case 'GET':
@@ -20,7 +20,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 }
 
-async function handleGET(userId : number, res : NextApiResponse) {
+async function handleGET(userId : string, res : NextApiResponse) {
     try {
         const user = await prisma.user.findUnique({
             where: { id: userId },
@@ -31,7 +31,7 @@ async function handleGET(userId : number, res : NextApiResponse) {
     }
 }
 
-async function handlePUT(userId: number, data: object, res : NextApiResponse) {
+async function handlePUT(userId: string, data: object, res : NextApiResponse) {
     try {
         const user = await prisma.user.update({
             where: { id: userId },
@@ -43,7 +43,7 @@ async function handlePUT(userId: number, data: object, res : NextApiResponse) {
     }
 }
 
-async function handleDELETE(userId: number, res: NextApiResponse) {
+async function handleDELETE(userId: string, res: NextApiResponse) {
     try{
         const user = await prisma.user.delete({
             where: { id: userId }

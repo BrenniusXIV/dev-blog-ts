@@ -1,22 +1,52 @@
 import React from "react";
 import Link from "next/link";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 type NavbarProps = {
   className: string;
 };
 
 const Navbar = ({ className }: NavbarProps): JSX.Element => {
+  const { data: session, status } = useSession();
+  const loading = status === "loading";
+
   return (
     <div className={className}>
       <Link href="/">
         <a>Home</a>
       </Link>
-      <Link href="/profile">
-        <a>Profile</a>
-      </Link>
-      <Link href="/login">
-        <a>Login</a>
-      </Link>
+
+      {!session && (
+        <Link href="/api/auth/signin">
+          <a
+            onClick={(e) => {
+              e.preventDefault();
+              signIn();
+            }}
+          >
+            Login
+          </a>
+        </Link>
+      )}
+
+      {session && (
+        <>
+          <Link href="/profile">
+            <a>Profile</a>
+          </Link>
+
+          <Link href="/api/auth/signout">
+            <a
+              onClick={(e) => {
+                e.preventDefault();
+                signOut();
+              }}
+            >
+              Logout
+            </a>
+          </Link>
+        </>
+      )}
       <style jsx>{`
         div {
           display: flex;
