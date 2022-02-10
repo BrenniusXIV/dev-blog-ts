@@ -1,0 +1,27 @@
+.formContainer {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+    margin: 8px 128px;
+    align-items: center;
+    
+}
+
+.formElement {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: blue;
+    border: lightskyblue solid 2px;
+    border-radius: 24px;
+    padding: 16px;
+}
+
+.formDiv {
+    padding: 8px;
+}
+
+.formTitle {
+    text-decoration: underline;
+}
