@@ -17,16 +17,21 @@ const Navbar = ({ className }: NavbarProps): JSX.Element => {
       </Link>
 
       {!session && (
-        <Link href="/api/auth/signin">
-          <a
-            onClick={(e) => {
-              e.preventDefault();
-              signIn();
-            }}
-          >
-            Login
-          </a>
-        </Link>
+        <>
+          <Link href="/createAccount">
+            <a>Sign Up</a>
+          </Link>
+          <Link href="/api/auth/signin">
+            <a
+              onClick={(e) => {
+                e.preventDefault();
+                signIn();
+              }}
+            >
+              Login
+            </a>
+          </Link>
+        </>
       )}
 
       {session && (
