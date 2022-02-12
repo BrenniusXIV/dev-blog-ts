@@ -8,6 +8,7 @@ export default async function handler(
 ) {
   const { email, name, password } = req.body;
 
+  try {
   const hashedPassword = await hash(password, 10);
   const postResult = await prisma.user.create({
     data: {
@@ -17,4 +18,7 @@ export default async function handler(
     },
   });
   res.status(200).json(postResult);
+} catch (error) {
+  res.status(400).json({"errorMessage": "Email address is already in use."})
+}
 }
