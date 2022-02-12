@@ -25,3 +25,14 @@
 .formTitle {
     text-decoration: underline;
 }
+
+.errorDiv {
+    color: orangered !important;
+    font-weight: bolder;
+}
+
+.successDiv {
+    color: lightgreen !important;
+    font-weight: bold;
+    font-style: italic;
+}
