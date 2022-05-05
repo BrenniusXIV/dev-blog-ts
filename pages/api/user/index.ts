@@ -6,7 +6,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { email, name, password } = req.body;
+  const { email, name, password } : { email: string, name: string, password: string} = req.body;
 
   try {
   const hashedPassword = await hash(password, 10);

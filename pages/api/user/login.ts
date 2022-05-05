@@ -3,7 +3,7 @@ import { hash, compare } from "bcryptjs";
 import prisma from "../../../db/prisma";
 
 export default async function login(req: NextApiRequest, res: NextApiResponse) {
-  const { email, password } = req.body;
+  const { email, password }: { email: string, password: string } = req.body;
 
   const userResult = await prisma.user.findUnique({
     where: {
