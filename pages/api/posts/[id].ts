@@ -6,13 +6,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     switch (req.method){
         case 'GET':
-            handleGET(postId, res)
+            await handleGET(postId, res)
             break
         case 'PUT':
-            handlePUT(postId, req.body, res)
+            await handlePUT(postId, req.body, res)
             break
         case 'DELETE':
-            handleDELETE(postId, res)
+            await handleDELETE(postId, res)
             break
         default:
             res.status(400)
