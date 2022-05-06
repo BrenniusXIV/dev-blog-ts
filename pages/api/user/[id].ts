@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import prisma from '../../../db/prisma'
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function requestUserByIdHandler(req: NextApiRequest, res: NextApiResponse) {
     const userId = String(req.query.id)
 
     switch (req.method){
@@ -15,7 +15,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             await handleDELETE(userId, res)
             break
         default:
-            res.status(400)
+            res.status(405)
             break
     }
 }
